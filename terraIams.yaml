@@ -1,0 +1,11 @@
+- resource : google_service_account
+  iams:
+  - roles/raf
+- resource: google_container_node_pool
+  iams:
+  - roles/lala1
+  - roles/lolo1
+- resource: google_container_cluster
+  iams:
+  - roles/lala2
+  - roles/lolo2
