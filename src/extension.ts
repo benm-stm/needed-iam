@@ -24,9 +24,9 @@ export function activate(context: ExtensionContext) {
 		workspace.getConfiguration("needed-iam").update("enableCodeLens", false, true);
 	});
 
-	commands.registerCommand("needed-iam.codelensAction", (args: any) => {
+	/*commands.registerCommand("needed-iam.codelensAction", (args: any) => {
 		window.showInformationMessage(`Roles needed by terraform :${args}`);
-	});
+	});*/
 }
 
 // this method is called when your extension is deactivated

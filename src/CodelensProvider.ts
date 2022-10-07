@@ -25,7 +25,7 @@ export class CodelensProvider implements vscode.CodeLensProvider {
             this._onDidChangeCodeLenses.fire();
         });
         this.loadResourceIams("terraIams.yaml")
-                .then((val) => this.yaml = val);
+            .then((val) => this.yaml = val);
     }
 
     public provideCodeLenses(document: vscode.TextDocument, token: vscode.CancellationToken): vscode.CodeLens[] | Thenable<vscode.CodeLens[]> {
@@ -36,26 +36,24 @@ export class CodelensProvider implements vscode.CodeLensProvider {
             const text = document.getText();
             let matches;
 
-                    while ((matches = regex.exec(text)) !== null) {
-                        const line = document.lineAt(document.positionAt(matches.index).line);
-                        const indexOf = line.text.indexOf(matches[0]);
-                        const position = new vscode.Position(line.lineNumber, indexOf);
-                        const range = document.getWordRangeAtPosition(position, new RegExp(this.regex));
-                        if (range) {
-                            let iams = this.parseIams(matches[1], this.yaml);
-                            let command = {
-                                title: "Needed IAM roles: " + iams.toString(),
-                                tooltip: "IAM role to be granted to terraform for " + matches[1],
-                                command: "needed-iam.codelensAction",
-                                arguments: iams,
-                            };
-                            this.codeLenses.push(new vscode.CodeLens(range, command));
-                        }
-                    }
-                    return this.codeLenses;
-               
+            while ((matches = regex.exec(text)) !== null) {
+                const line = document.lineAt(document.positionAt(matches.index).line);
+                const indexOf = line.text.indexOf(matches[0]);
+                const position = new vscode.Position(line.lineNumber, indexOf);
+                const range = document.getWordRangeAtPosition(position, new RegExp(this.regex));
+                if (range) {
+                    let iams = this.parseIams(matches[1], this.yaml);
+                    let command = {
+                        title: "Needed IAM roles: " + iams.toString(),
+                        tooltip: "IAM role to be granted to terraform for " + matches[1],
+                        command: "",
+                        //arguments: iams,
+                    };
+                    this.codeLenses.push(new vscode.CodeLens(range, command));
+                }
+            }
+            return this.codeLenses;
         }
-        console.log("got it "+this.codeLenses);
         return [];
     }
 
