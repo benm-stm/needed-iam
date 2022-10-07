@@ -24,6 +24,7 @@ export class CodelensProvider implements vscode.CodeLensProvider {
         vscode.workspace.onDidChangeConfiguration((_) => {
             this._onDidChangeCodeLenses.fire();
         });
+        //console.log(process.cwd());
         this.loadResourceIams("terraIams.yaml")
                 .then((val) => this.yaml = val);
     }
@@ -45,7 +46,7 @@ export class CodelensProvider implements vscode.CodeLensProvider {
                             let iams = this.parseIams(matches[1], this.yaml);
                             let command = {
                                 title: "Needed IAM roles: " + iams.toString(),
-                                tooltip: "IAM role to be granted to terraform for " + matches[1],
+                                tooltip: "IAM role to be granted to IAC service account to create " + matches[1],
                                 command: "needed-iam.codelensAction",
                                 arguments: iams,
                             };

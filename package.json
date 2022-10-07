@@ -12,6 +12,16 @@
   "activationEvents": [
     "workspaceContains:**/*.tf"
   ],
+  "contributes": {
+    "views": {
+      "explorer": [
+        {
+          "id": "needed-iam",
+          "name": "Needed-IAM"
+        }
+      ]
+    }
+  },
   "main": "./out/extension.js",
   "scripts": {
     "vscode:prepublish": "npm run compile",
